@@ -3,9 +3,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/TomceGraphics/music-downloader/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/TomceGraphics/music-downloader?display_name=tag&sort=semver&style=flat-square&color=2383e2"></a>
-  <a href="https://github.com/TomceGraphics/music-downloader/actions/workflows/release.yml"><img alt="Build" src="https://img.shields.io/github/actions/workflow/status/TomceGraphics/music-downloader/release.yml?style=flat-square&logo=github&label=build"></a>
-  <a href="https://github.com/TomceGraphics/music-downloader/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/TomceGraphics/music-downloader/total?style=flat-square&color=4daa57"></a>
+  <a href="https://github.com/OWNER/music-downloader/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/OWNER/music-downloader?display_name=tag&sort=semver&style=flat-square&color=2383e2"></a>
+  <a href="https://github.com/OWNER/music-downloader/actions/workflows/release.yml"><img alt="Build" src="https://img.shields.io/github/actions/workflow/status/OWNER/music-downloader/release.yml?style=flat-square&logo=github&label=build"></a>
+  <a href="https://github.com/OWNER/music-downloader/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/OWNER/music-downloader/total?style=flat-square&color=4daa57"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-4daa57?style=flat-square"></a>
   <img alt="Platforms: Windows and Linux" src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux-2383e2?style=flat-square">
   <img alt="Python 3.12" src="https://img.shields.io/badge/python-3.12-3776AB?style=flat-square&logo=python&logoColor=white">
@@ -22,6 +22,7 @@ A small, fast desktop app on top of <a href="https://github.com/yt-dlp/yt-dlp">y
 </p>
 
 > **Before you use it:** only download content you have the right to download. See [Legal](#legal--disclaimer).
+> *Replace `OWNER` in this README and in `core/version.py` (`GITHUB_REPO`) with your GitHub user name.*
 
 ## Features
 
@@ -49,7 +50,7 @@ A small, fast desktop app on top of <a href="https://github.com/yt-dlp/yt-dlp">y
 
 ## Install
 
-Download the latest build from the [Releases page](https://github.com/TomceGraphics/music-downloader/releases/latest). Every release has a `SHA256SUMS` file.
+Download the latest build from the [Releases page](https://github.com/OWNER/music-downloader/releases/latest). Every release has a `SHA256SUMS` file.
 
 ### Windows
 1. Download `music-downloader-vX.Y.Z-windows-x64.zip` and extract it anywhere.
@@ -87,7 +88,7 @@ Optional `config.json` keys: `appearance` (`system` / `light` / `dark`), `notify
 ## Run from source
 ```bash
 # Fedora:  sudo dnf install python3-tkinter      Ubuntu/Debian:  sudo apt install python3-tk
-git clone https://github.com/TomceGraphics/music-downloader && cd music-downloader
+git clone https://github.com/OWNER/music-downloader && cd music-downloader
 python3 -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 python main.py
