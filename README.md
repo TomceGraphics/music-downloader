@@ -27,25 +27,21 @@ A small, fast desktop app on top of <a href="https://github.com/yt-dlp/yt-dlp">y
 
 | | |
 |---|---|
-| **Live track list** | Every song gets a row with cover art, artist, speed, ETA and a state (downloading, done, skipped, failed). A thin overall bar tracks the whole playlist. |
-| **Tagged MP3s** | Best-quality audio converted to MP3 with title, artist and cover art embedded. |
-| **Paste and go** | Big link field with a Paste button. Copy a YouTube link, come back to the window, and it drops in if the field is empty. |
-| **Never twice** | An `archive.txt` remembers what you already downloaded; repeat runs skip those tracks and say so. |
+| **Whole playlists** | One link, live progress bar, per-track counter and a colour-coded log. |
+| **Tagged MP3s** | Best quality audio converted to MP3 with title, artist and cover art embedded. |
+| **Never twice** | An `archive.txt` remembers what you already downloaded; repeat runs skip those tracks. |
 | **Duplicate checker** | Finds repeats by artist and title and moves them to `Duplicates/`. It never deletes anything. |
 | **Bring your own login** | Import cookies from Firefox, Chrome, Edge, Brave, Chromium, Opera or Vivaldi. If that fails, it retries without cookies. |
-| **Light and dark** | Follows your system theme, or pick one in Settings. Bundled Inter font, so it looks the same on every machine. |
-| **Quiet by default** | Settings live behind the gear (`Ctrl+,`, `Esc` to go back). The raw log is a collapsible "Details" drawer that turns amber when something needs a look. |
-| **Done notification** | A desktop notification when a download finishes while the window is in the background (`notify-send` on Linux, a toast on Windows). |
 | **Self-contained** | Fetches yt-dlp, FFmpeg and a JS runtime on first run, keeps yt-dlp updated, prefers your system copies. |
 | **Extensible** | Every feature is one small file. See [docs/ADDING_A_FEATURE.md](docs/ADDING_A_FEATURE.md). |
 
 <p align="center">
-  <img src="docs/screenshots/01-download.png" width="49%" alt="Playlist download with live per-track progress">
-  <img src="docs/screenshots/02-complete.png" width="49%" alt="Finished download in light mode">
-  <img src="docs/screenshots/03-settings.png" width="49%" alt="Settings page">
-  <img src="docs/screenshots/04-details.png" width="49%" alt="Details drawer and duplicate checker">
+  <img src="docs/screenshots/01-download.png" width="49%" alt="Playlist download with live progress">
+  <img src="docs/screenshots/02-complete.png" width="49%" alt="Finished download">
+  <img src="docs/screenshots/03-duplicates.png" width="49%" alt="Duplicate checker">
+  <img src="docs/screenshots/04-cookies.png" width="49%" alt="Cookie import">
 </p>
-<p align="center"><sub>Screenshots are rendered from the real UI by <code>tools/make_screenshots.py</code> with staged sample data (fictional artists and generated cover art).</sub></p>
+<p align="center"><sub>Screenshots are rendered from the real UI by <code>tools/make_screenshots.py</code> with staged sample data (fictional artists).</sub></p>
 
 ## Install
 
@@ -82,7 +78,7 @@ Unpacked, that is roughly 470 MB (static FFmpeg builds are large). To avoid it, 
 
 Nothing user-specific is ever stored in the app folder or the repository.
 
-Optional `config.json` keys: `appearance` (`system` / `light` / `dark`), `notify_when_done`, `browser_profile` (explicit browser profile path, needed for Flatpak browsers, e.g. `~/.var/app/org.mozilla.firefox/.mozilla/firefox/<profile>`), `prefer_system_binaries` (default `true`), `fetch_deno`, `check_updates`, and `ytdlp_path` / `ffmpeg_path` overrides.
+Optional `config.json` keys: `browser_profile` (explicit browser profile path, needed for Flatpak browsers, e.g. `~/.var/app/org.mozilla.firefox/.mozilla/firefox/<profile>`), `prefer_system_binaries` (default `true`), `fetch_deno`, `check_updates`, and `ytdlp_path` / `ffmpeg_path` overrides.
 
 ## Run from source
 ```bash
@@ -116,7 +112,7 @@ A manual run of the workflow (Actions tab → *release* → *Run workflow*) buil
 ## Develop
 - [ARCHITECTURE.md](ARCHITECTURE.md): modules and the `AppContext` API.
 - [docs/ADDING_A_FEATURE.md](docs/ADDING_A_FEATURE.md) and [features/_template.py](features/_template.py): add a feature with one file and one registry line.
-- Regenerate the images (needs Pillow): `python tools/make_icons.py`, then `xvfb-run -a -s "-screen 0 1800x1500x24" python tools/make_screenshots.py && python tools/make_banner.py`.
+- Regenerate the images: `xvfb-run -a -s "-screen 0 1800x1500x24" python tools/make_screenshots.py && python tools/make_banner.py` (needs Pillow).
 
 ## Legal & disclaimer
 Music Downloader is a front-end for [yt-dlp](https://github.com/yt-dlp/yt-dlp) and [FFmpeg](https://ffmpeg.org). It is not affiliated with or endorsed by YouTube, Google or any other service; those names are trademarks of their owners.

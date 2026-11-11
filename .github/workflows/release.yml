@@ -19,12 +19,12 @@ jobs:
         include:
           # ubuntu-22.04 on purpose: a PyInstaller bundle needs glibc >= the build machine's.
           # Building on an older image (glibc 2.35) runs on more distros than ubuntu-latest.
-          - { os: ubuntu-22.04,   shell: bash, build: "./build.sh", files: "dist/*.tar.gz" }
-          - { os: windows-latest, shell: cmd,  build: "build.bat",  files: "dist/*.zip" }
+          - { os: ubuntu-22.04,   shell: bash, build: "./build.sh",      files: "dist/*.tar.gz" }
+          - { os: windows-latest, shell: cmd,  build: "call build.bat", files: "dist/*.zip"   }
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.12"            # pinned: the same Python on both platforms
 
@@ -42,7 +42,7 @@ jobs:
         run: ${{ matrix.build }}
 
       # upload-artifact and download-artifact majors are a pair: bump them together
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@v4
         with:
           name: dist-${{ runner.os }}
           path: ${{ matrix.files }}
@@ -55,7 +55,7 @@ jobs:
     permissions:
       contents: write                               # needed to create the release
     steps:
-      - uses: actions/download-artifact@v8
+      - uses: actions/download-artifact@v4
         with:
           path: out
           merge-multiple: true                      # both platforms' files into one folder
