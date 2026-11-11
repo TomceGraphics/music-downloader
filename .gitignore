@@ -1,0 +1,30 @@
+# build output
+build/
+dist/
+*.egg-info/
+
+# virtual environments
+.venv/
+.venv-build/
+venv/
+
+# python
+__pycache__/
+*.pyc
+
+# generated at build time (the .spec file IS committed: it is hand-written)
+assets/icon.ico
+
+# user data must never be committed (the app stores it in ~/.config and ~/.local/share anyway)
+config.json
+archive.txt
+Duplicates/
+*.mp3
+*.webm
+*.part
+
+# editors / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Music Downloader
+Comment=Download music as MP3 using yt-dlp
+Exec="@EXEC@"
+Icon=@ICON@
+Terminal=false
+Categories=AudioVideo;Audio;
+StartupWMClass=MusicDownloader

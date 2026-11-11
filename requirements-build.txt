@@ -1,0 +1,3 @@
+# Build-time only. Install together with requirements.txt.
+pyinstaller>=6.10,<8
+pillow>=10.0,<14        # only converts assets/icon.png -> icon.ico on Windows; never bundled
