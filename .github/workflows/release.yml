@@ -22,11 +22,7 @@ jobs:
           # ubuntu-22.04 on purpose: a PyInstaller bundle needs glibc >= the build machine's.
           # Building on an older image (glibc 2.35) runs on more distros than ubuntu-latest.
           - os: ubuntu-22.04
-            shell: bash
-            build: "./build.sh"
           - os: windows-latest
-            shell: cmd
-            build: "call build.bat"
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -44,9 +40,14 @@ jobs:
         shell: bash
         run: test "v$(python packaging/info.py version)" = "$GITHUB_REF_NAME"
 
-      - name: Build
-        shell: ${{ matrix.shell }}
-        run: ${{ matrix.build }}
+      - name: Build (Linux)
+        if: runner.os == 'Linux'
+        run: ./build.sh
+
+      - name: Build (Windows)
+        if: runner.os == 'Windows'
+        shell: cmd
+        run: call build.bat
 
       - name: Linux packages (.deb and .rpm)
         if: runner.os == 'Linux'
