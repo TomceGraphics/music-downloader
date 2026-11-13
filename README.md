@@ -3,9 +3,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/OWNER/music-downloader/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/OWNER/music-downloader?display_name=tag&sort=semver&style=flat-square&color=2383e2"></a>
-  <a href="https://github.com/OWNER/music-downloader/actions/workflows/release.yml"><img alt="Build" src="https://img.shields.io/github/actions/workflow/status/OWNER/music-downloader/release.yml?style=flat-square&logo=github&label=build"></a>
-  <a href="https://github.com/OWNER/music-downloader/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/OWNER/music-downloader/total?style=flat-square&color=4daa57"></a>
+  <a href="https://github.com/TomceGraphics/music-downloader/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/TomceGraphics/music-downloader?display_name=tag&sort=semver&style=flat-square&color=2383e2"></a>
+  <a href="https://github.com/TomceGraphics/music-downloader/actions/workflows/release.yml"><img alt="Build" src="https://img.shields.io/github/actions/workflow/status/TomceGraphics/music-downloader/release.yml?style=flat-square&logo=github&label=build"></a>
+  <a href="https://github.com/TomceGraphics/music-downloader/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/TomceGraphics/music-downloader/total?style=flat-square&color=4daa57"></a>
   <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-4daa57?style=flat-square"></a>
   <img alt="Platforms: Windows and Linux" src="https://img.shields.io/badge/platform-Windows%20%7C%20Linux-2383e2?style=flat-square">
   <img alt="Python 3.12" src="https://img.shields.io/badge/python-3.12-3776AB?style=flat-square&logo=python&logoColor=white">
@@ -22,7 +22,6 @@ A small, fast desktop app on top of <a href="https://github.com/yt-dlp/yt-dlp">y
 </p>
 
 > **Before you use it:** only download content you have the right to download. See [Legal](#legal--disclaimer).
-> *Replace `OWNER` in this README and in `core/version.py` (`GITHUB_REPO`) with your GitHub user name.*
 
 ## Features
 
@@ -50,23 +49,20 @@ A small, fast desktop app on top of <a href="https://github.com/yt-dlp/yt-dlp">y
 
 ## Install
 
-Download the latest build from the [Releases page](https://github.com/OWNER/music-downloader/releases/latest). Every release has a `SHA256SUMS` file.
+Download the file for your system from the [Releases page](https://github.com/TomceGraphics/music-downloader/releases/latest). Every release has a `SHA256SUMS` file.
 
-### Windows
-1. Download `music-downloader-vX.Y.Z-windows-x64.zip` and extract it anywhere.
-2. Run `music-downloader.exe`.
+| Your system | Download | Install |
+|---|---|---|
+| **Windows 10/11** | `music-downloader-vX.Y.Z-windows-x64-setup.exe` | Double-click it. Adds a Start menu entry and an uninstaller. |
+| **Debian, Ubuntu, Mint** | `music-downloader_X.Y.Z_amd64.deb` | `sudo apt install ./music-downloader_X.Y.Z_amd64.deb` |
+| **Fedora** | `music-downloader-X.Y.Z-1.x86_64.rpm` | `sudo dnf install ./music-downloader-X.Y.Z-1.x86_64.rpm` |
+| Other Linux | `music-downloader-vX.Y.Z-linux-x86_64.tar.gz` | Extract it, then run `./install.sh` (no sudo, installs to `~/.local`) |
+| Windows, no install | `music-downloader-vX.Y.Z-windows-x64.zip` | Extract anywhere and run `music-downloader.exe` |
 
-The app is not code-signed, so Windows SmartScreen may say "Windows protected your PC". Choose **More info → Run anyway**, and compare the zip's hash with `SHA256SUMS` first:
-`Get-FileHash .\music-downloader-*.zip -Algorithm SHA256`
+Linux builds need glibc 2.35 or newer (Ubuntu 22.04+, Debian 12+, Fedora 36+). Remove the packages with `sudo apt remove music-downloader` or `sudo dnf remove music-downloader`; your music and settings are left alone.
 
-### Linux (Fedora, Ubuntu, ...)
-```bash
-tar xzf music-downloader-vX.Y.Z-linux-x86_64.tar.gz
-cd music-downloader-vX.Y.Z-linux-x86_64
-./install.sh            # no sudo: installs to ~/.local, adds a menu entry and a `music-downloader` command
-```
-Uninstall with `./install.sh --uninstall` (your music and settings are left alone). Prefer not to install? Run `app/music-downloader` directly.
-The Linux build needs glibc 2.35 or newer (Fedora 36+, Ubuntu 22.04+, Debian 12+).
+The Windows files are not code-signed, so SmartScreen may say "Windows protected your PC". Choose **More info → Run anyway**, and compare the file's hash with `SHA256SUMS` first:
+`Get-FileHash .\music-downloader-*-setup.exe -Algorithm SHA256`
 
 ### First run
 The app downloads what it needs into your user data folder: yt-dlp (about 41 MB), FFmpeg (about 120 MB download) and, only if you have no `deno`, `node` or `bun`, a Deno JS runtime that current YouTube extraction requires. The log shows progress.
@@ -88,7 +84,7 @@ Optional `config.json` keys: `appearance` (`system` / `light` / `dark`), `notify
 ## Run from source
 ```bash
 # Fedora:  sudo dnf install python3-tkinter      Ubuntu/Debian:  sudo apt install python3-tk
-git clone https://github.com/OWNER/music-downloader && cd music-downloader
+git clone https://github.com/TomceGraphics/music-downloader && cd music-downloader
 python3 -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 python main.py
@@ -96,15 +92,18 @@ python main.py
 
 ## Build
 ```bash
-./build.sh      # Linux  -> dist/music-downloader-vX.Y.Z-linux-<arch>.tar.gz
-build.bat       # Windows -> dist\music-downloader-vX.Y.Z-windows-x64.zip
+./build.sh                      # Linux   -> dist/music-downloader-vX.Y.Z-linux-<arch>.tar.gz
+bash packaging/build-deb.sh     # then    -> dist/music-downloader_X.Y.Z_amd64.deb   (Debian/Ubuntu host)
+bash packaging/build-rpm.sh     # then    -> dist/music-downloader-X.Y.Z-1.x86_64.rpm (needs rpmbuild)
+build.bat                       # Windows -> dist\music-downloader-vX.Y.Z-windows-x64.zip
+# Windows setup .exe: after build.bat, run Inno Setup:  ISCC.exe /DAppVersion=X.Y.Z packaging\windows\installer.iss
 ```
 Both use the same `music-downloader.spec` (onedir, no UPX, nothing heavy bundled: about 34 MB unpacked, 14 MB archive on Linux, including the Inter font). PyInstaller cannot cross-compile, so build each platform on that platform; CI does this for you.
 
 ## Cut a release
 1. Bump `VERSION` in `core/version.py` and commit.
-2. `git tag v1.0.1 && git push origin main v1.0.1`
-3. [GitHub Actions](.github/workflows/release.yml) builds Windows and Linux, checks the tag matches `VERSION`, and publishes the release with `SHA256SUMS`.
+2. `git tag v1.2.1 && git push origin main v1.2.1`
+3. [GitHub Actions](.github/workflows/release.yml) builds Windows (setup `.exe` + portable `.zip`) and Linux (`.deb`, `.rpm`, `.tar.gz`), checks the tag matches `VERSION`, and publishes the release with `SHA256SUMS`.
 
 A manual run of the workflow (Actions tab → *release* → *Run workflow*) builds without publishing.
 

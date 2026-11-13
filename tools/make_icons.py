@@ -37,11 +37,19 @@ def render(draw_fn, color, px):
 
 
 def gear(stroke, rrect, circle, d, k, c):
-    for i in range(8):
-        a = math.radians(i * 45)
-        stroke([(12 + 7.6 * math.cos(a), 12 + 7.6 * math.sin(a)), (12 + 9.8 * math.cos(a), 12 + 9.8 * math.sin(a))], 3.6)
-    circle(12, 12, 6.2, 2.6)
-    circle(12, 12, 2.2, 2.0)
+    """Outlined cog: 8 trapezoid teeth around a root circle, plus a centre hole."""
+    r_out, r_root, n = 9.0, 6.9, 8
+    pts = []
+    for i in range(n):
+        t = i * 360 / n
+        for ang, r in ((t - 12, r_root), (t - 7.5, r_out), (t + 7.5, r_out), (t + 12, r_root)):
+            a = math.radians(ang - 90)
+            pts.append((12 + r * math.cos(a), 12 + r * math.sin(a)))
+        for ang in (t + 20, t + 28):                       # short arc along the root between teeth
+            a = math.radians(ang - 90)
+            pts.append((12 + r_root * math.cos(a), 12 + r_root * math.sin(a)))
+    stroke(pts + [pts[0], pts[1]], 1.9)
+    circle(12, 12, 2.8, 1.9)
 
 
 def paste(stroke, rrect, circle, d, k, c):
